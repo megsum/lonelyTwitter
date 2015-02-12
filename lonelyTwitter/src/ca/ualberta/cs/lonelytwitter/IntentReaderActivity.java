@@ -5,6 +5,7 @@ import android.widget.TextView;
 import android.app.Activity;
 import android.content.Intent;
 
+//reads text from intent and performs transformations
 public class IntentReaderActivity extends Activity {
 
 	public static final String TEXT_KEY = "TEXT";
@@ -25,7 +26,14 @@ public class IntentReaderActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intent_reader);
+		Intent intent = getIntent();
+		text = intent.getStringExtra(TEXT_KEY);
+		mode = intent.getIntExtra(TRANSFORM_KEY,NORMAL);
+		text = transformText(text);
+		TextView view = (TextView) findViewById(R.id.intentText);
+		view.setText(text);
 	}
+	
 	
 	public String transformText(String text) {
 		switch (mode) {
